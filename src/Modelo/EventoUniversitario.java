@@ -1,3 +1,7 @@
+package Modelo;
+
+import Modelo.Actividades.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +53,7 @@ public class EventoUniversitario {
         }
         System.out.println("¿Es gratuito?: " + strEsGratis);
 
-        System.out.println("-------------------- Sala asignada --------------------");
+        System.out.println("-------------------- Modelo.Sala asignada --------------------");
         sala.mostrarDatosSala();
 
         System.out.println("--------------------- Actividades ---------------------");
@@ -71,7 +75,7 @@ public class EventoUniversitario {
 
     public void crearActividad(int i, String titulo, int cupoMax, String tipo, String disertante)
     {
-        if(tipo.equals("Charla"))
+        if(tipo.equals("Modelo.Actividades.Charla"))
         {
             listaActividades.add(new Charla(i, titulo, cupoMax, disertante));
         }
@@ -83,7 +87,7 @@ public class EventoUniversitario {
 
     public void crearActividad(int i, String titulo, int cupoMax, String tipo, boolean requiereNotebook)
     {
-        if(tipo.equals("Taller"))
+        if(tipo.equals("Modelo.Actividades.Taller"))
         {
             listaActividades.add(new Taller(i, titulo, cupoMax, requiereNotebook));
         }

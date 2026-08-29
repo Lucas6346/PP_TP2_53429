@@ -1,3 +1,5 @@
+package Modelo.Actividades;
+
 public class Charla extends Actividad
 {
     private String disertante;
@@ -15,6 +17,6 @@ public class Charla extends Actividad
 
     public String getTipo()
     {
-        return "Charla";
+        return "Modelo.Actividades.Charla";
     }
 }

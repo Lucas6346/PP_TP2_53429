@@ -1,3 +1,7 @@
+package Modelo.Actividades;
+
+import Modelo.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +39,7 @@ public abstract class Actividad {
     }
 
     public void mostrarDatosAct() {
-        System.out.println("| Actividad: " + titulo);
+        System.out.println("| Modelo.Actividades.Actividad: " + titulo);
         System.out.println("| ID de actividad: " + id);
         System.out.println("| Cupo máximo: " + cupoMaximo);
     }

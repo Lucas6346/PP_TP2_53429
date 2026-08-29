@@ -1,3 +1,7 @@
+package Modelo;
+
+import Modelo.Actividades.*;
+
 import java.time.LocalDate;
 
 public class Inscripcion {

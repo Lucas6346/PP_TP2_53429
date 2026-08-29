@@ -1,3 +1,5 @@
+package Modelo.Actividades;
+
 public class Taller extends Actividad
 {
     private boolean requiereNotebook;
@@ -19,6 +21,6 @@ public class Taller extends Actividad
 
     public String getTipo()
     {
-        return "Taller";
+        return "Modelo.Actividades.Taller";
     }
 }
