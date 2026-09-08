@@ -2,6 +2,7 @@ package Modelo;
 
 import Modelo.Actividades.*;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,6 +113,24 @@ public class EventoUniversitario {
         }
 
         return res * 1.21;
+    }
+
+    public void SerializarEvento(String name) throws IOException
+    {
+        FileOutputStream fos = new FileOutputStream(name);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(this);
+        oos.close();
+    }
+
+    public static EventoUniversitario LeerEvento(String path) throws IOException, ClassNotFoundException
+    {
+        FileInputStream fis = new FileInputStream(path);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        EventoUniversitario ev = (EventoUniversitario) ois.readObject();
+        ois.close();
+
+        return ev;
     }
 
     public static int getCantidadEventos() {
