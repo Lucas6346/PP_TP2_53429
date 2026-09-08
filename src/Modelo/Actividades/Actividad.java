@@ -1,5 +1,6 @@
 package Modelo.Actividades;
 
+import Excepciones.CupoExcedidoException;
 import Modelo.*;
 
 import java.time.LocalDate;
@@ -22,8 +23,10 @@ public abstract class Actividad {
         this.listaInscripciones = new ArrayList<>();
     }
 
-    public void inscribir(Estudiante estudiante) {
+    public void inscribir(Estudiante estudiante) throws CupoExcedidoException {
         Inscripcion ins = new Inscripcion(LocalDate.now(), "Inscripto", estudiante, this);
+
+        if(listaInscripciones.size() == cupoMaximo) throw new CupoExcedidoException(this);
         listaInscripciones.add(ins);
     }
 
@@ -39,7 +42,7 @@ public abstract class Actividad {
     }
 
     public void mostrarDatosAct() {
-        System.out.println("| Modelo.Actividades.Actividad: " + titulo);
+        System.out.println("| Actividad: " + titulo);
         System.out.println("| ID de actividad: " + id);
         System.out.println("| Cupo máximo: " + cupoMaximo);
     }
