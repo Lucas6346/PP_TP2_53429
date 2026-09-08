@@ -3,11 +3,12 @@ package Modelo.Actividades;
 import Excepciones.CupoExcedidoException;
 import Modelo.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Actividad {
+public abstract class Actividad implements Serializable {
     private int id;
     private String titulo;
     private int cupoMaximo;

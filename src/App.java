@@ -34,11 +34,13 @@ public class App
             ev1.getActividad(1).inscribir(est3);
 
             // Mostrar resumen de datos del evento y total de eventos creados
-            ev1.mostrarDatos();
+            //ev1.mostrarDatos();
             System.out.println("Total de eventos creados: " + EventoUniversitario.getCantidadEventos());
 
             ev1.SerializarEvento("ev1.dat");
             EventoUniversitario ev1_copia = EventoUniversitario.LeerEvento("ev1.dat");
+
+            ev1_copia.mostrarDatos();
         }
         catch(CupoExcedidoException ex)
         {

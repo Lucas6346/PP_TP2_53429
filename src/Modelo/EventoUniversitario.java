@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventoUniversitario {
+public class EventoUniversitario implements Serializable {
     private final String id;
     private String titulo;
     private double costoBase;
