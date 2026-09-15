@@ -6,6 +6,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//FIXME:
+//  cambiar metodo crearActividad
+//  cambiar formas de mostrar los datos implementando getters en las clases necesarias en lugar de submetodos mostrar
+
 public class EventoUniversitario implements Serializable {
     private final String id;
     private String titulo;
@@ -54,7 +58,7 @@ public class EventoUniversitario implements Serializable {
         }
         System.out.println("¿Es gratuito?: " + strEsGratis);
 
-        System.out.println("-------------------- Modelo.Sala asignada --------------------");
+        System.out.println("-------------------- Sala asignada --------------------");
         sala.mostrarDatosSala();
 
         System.out.println("--------------------- Actividades ---------------------");
@@ -76,7 +80,7 @@ public class EventoUniversitario implements Serializable {
 
     public void crearActividad(int i, String titulo, int cupoMax, String tipo, String disertante)
     {
-        if(tipo.equals("Modelo.Actividades.Charla"))
+        if(tipo.equals("Charla"))
         {
             listaActividades.add(new Charla(i, titulo, cupoMax, disertante));
         }
@@ -88,7 +92,7 @@ public class EventoUniversitario implements Serializable {
 
     public void crearActividad(int i, String titulo, int cupoMax, String tipo, boolean requiereNotebook)
     {
-        if(tipo.equals("Modelo.Actividades.Taller"))
+        if(tipo.equals("Taller"))
         {
             listaActividades.add(new Taller(i, titulo, cupoMax, requiereNotebook));
         }

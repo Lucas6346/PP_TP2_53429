@@ -53,6 +53,11 @@ public abstract class Actividad implements Serializable {
         System.out.println("| Esta actividad es de tipo: " + this.getTipo());
     }
 
+    public String getTitulo()
+    {
+        return titulo;
+    }
+
     public abstract double calcularCostoMateriales();
     public abstract String getTipo();
 }

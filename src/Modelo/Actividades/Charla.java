@@ -10,13 +10,15 @@ public class Charla extends Actividad
         this.disertante = disertante;
     }
 
+    @Override
     public double calcularCostoMateriales()
     {
         return 0;
     }
 
+    @Override
     public String getTipo()
     {
-        return "Modelo.Actividades.Charla";
+        return "Charla";
     }
 }

@@ -17,13 +17,13 @@ public class App
             //b) Evento
             EventoUniversitario ev1 = new EventoUniversitario("0", "Evento de Sistemas", 5000, false);
 
-            //c) Modelo.Sala
-            Sala sala1 = new Sala(0, "Modelo.Sala Sistemas");
+            //c) Sala
+            Sala sala1 = new Sala(0, "Sala Sistemas");
             ev1.asignarSala(sala1);
 
             //d) Actividades
-            ev1.crearActividad(0, "Modelo.Actividades.Charla de sistemas", 50, "Modelo.Actividades.Charla", "Juan Perez");
-            ev1.crearActividad(1, "Modelo.Actividades.Taller de Programación", 200, "Modelo.Actividades.Taller", true);
+            ev1.crearActividad(0, "Charla de sistemas", 50, "Charla", "Juan Perez");
+            ev1.crearActividad(1, "Taller de Programación", 200, "Taller", true);
 
             //e) Inscribir estudiantes en la charla
             ev1.getActividad(0).inscribir(est1);

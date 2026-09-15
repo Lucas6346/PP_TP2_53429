@@ -16,4 +16,14 @@ public class Estudiante implements Serializable
         System.out.println("| Legajo: " + legajo);
         System.out.println("| Nombre: " + nombre);
     }
+
+    public String getNombre()
+    {
+        return nombre;
+    }
+
+    public String getLegajo()
+    {
+        return legajo;
+    }
 }
