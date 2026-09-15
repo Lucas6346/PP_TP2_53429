@@ -119,20 +119,47 @@ public class EventoUniversitario implements Serializable {
         return res * 1.21;
     }
 
-    public void SerializarEvento(String name) throws IOException
+    public boolean SerializarEvento(String name)
     {
-        FileOutputStream fos = new FileOutputStream(name);
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(this);
-        oos.close();
+        try
+        {
+            FileOutputStream fos = new FileOutputStream(name);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(this);
+            oos.close();
+
+            return true;
+        }
+        catch (IOException ex)
+        {
+            System.out.println("Error al serializar evento:");
+            System.out.println(ex.getMessage());
+
+            return false;
+        }
     }
 
-    public static EventoUniversitario LeerEvento(String path) throws IOException, ClassNotFoundException
+    public static EventoUniversitario LeerEvento(String path)
     {
-        FileInputStream fis = new FileInputStream(path);
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        EventoUniversitario ev = (EventoUniversitario) ois.readObject();
-        ois.close();
+        EventoUniversitario ev = null;
+
+        try
+        {
+            FileInputStream fis = new FileInputStream(path);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            ev = (EventoUniversitario) ois.readObject();
+            ois.close();
+        }
+        catch (IOException ex)
+        {
+            System.out.println("Error al serializar evento:");
+            System.out.println(ex.getMessage());
+        }
+        catch (ClassNotFoundException ex)
+        {
+            System.out.println("Error al serializar evento, clase no encontrada:");
+            System.out.println(ex.getMessage());
+        }
 
         return ev;
     }

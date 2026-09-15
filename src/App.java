@@ -1,8 +1,6 @@
 import Excepciones.CupoExcedidoException;
 import Modelo.*;
 
-import java.io.IOException;
-
 public class App
 {
     public static void main(String[] args)
@@ -33,24 +31,23 @@ public class App
             ev1.getActividad(1).inscribir(est2);
             ev1.getActividad(1).inscribir(est3);
 
-            // Mostrar resumen de datos del evento y total de eventos creados
-            //ev1.mostrarDatos();
+            // Mostrar resumen de datos del evento
+            ev1.mostrarDatos();
+
+            EventoUniversitario ev1_copia = null;
+            if(ev1.SerializarEvento("ev1.dat"))
+            {
+                ev1_copia = EventoUniversitario.LeerEvento("ev1.dat");
+                ev1_copia.mostrarDatos();
+            }
+
             System.out.println("Total de eventos creados: " + EventoUniversitario.getCantidadEventos());
-
-            ev1.SerializarEvento("ev1.dat");
-            EventoUniversitario ev1_copia = EventoUniversitario.LeerEvento("ev1.dat");
-
-            ev1_copia.mostrarDatos();
         }
         catch(CupoExcedidoException ex)
         {
             System.out.println("Error, cupo excedido.\nExcepción: " + ex.getMessage());
             System.out.println("Ocurrido en:");
             ex.getActividadAsociada().mostrarDatosAct();
-        }
-        catch(IOException | ClassNotFoundException ex)
-        {
-            System.out.println(ex.getMessage());
         }
     }
 }
