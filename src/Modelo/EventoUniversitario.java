@@ -5,10 +5,11 @@ import Modelo.Actividades.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 //FIXME:
-//  cambiar metodo crearActividad
-//  cambiar formas de mostrar los datos implementando getters en las clases necesarias en lugar de submetodos mostrar
+//  -cambiar formas de mostrar los datos implementando getters en las clases necesarias en lugar de submetodos mostrar
+//  -en mostrar datos, tambien mostrar datos propios de cada subclase actividad (disertante, nivel, ...)
 
 public class EventoUniversitario implements Serializable {
     private final String id;
@@ -78,27 +79,33 @@ public class EventoUniversitario implements Serializable {
         this.sala = sala;
     }
 
-    public void crearActividad(int i, String titulo, int cupoMax, String tipo, String disertante)
+    public void crearActividad(int i, String titulo, int cupoMax, String tipoActividad)
     {
-        if(tipo.equals("Charla"))
+        Scanner scanner = new Scanner(System.in);
+
+        if(tipoActividad.equals("Charla"))
         {
+            System.out.println("Ingrese el nombre del disertante: ");
+            String disertante = scanner.nextLine();
             listaActividades.add(new Charla(i, titulo, cupoMax, disertante));
         }
-        else
+        else if(tipoActividad.equals("Taller"))
         {
-            System.out.println("Error en el tipo");
-        }
-    }
+            boolean requiereNotebook = false;
 
-    public void crearActividad(int i, String titulo, int cupoMax, String tipo, boolean requiereNotebook)
-    {
-        if(tipo.equals("Taller"))
-        {
+            System.out.println("Requiere notebook? (S/N)");
+            if(scanner.nextLine().equals("S"))
+            {
+                requiereNotebook = true;
+            }
+
             listaActividades.add(new Taller(i, titulo, cupoMax, requiereNotebook));
         }
-        else
+        else if(tipoActividad.equals("Curso"))
         {
-            System.out.println("Error en el tipo");
+            System.out.println("Ingrese el nivel del curso: ");
+            int nivel = scanner.nextInt();
+            listaActividades.add(new Curso(i, titulo, cupoMax, nivel));
         }
     }
 
@@ -167,7 +174,6 @@ public class EventoUniversitario implements Serializable {
     public static int getCantidadEventos() {
         return cantidadEventos;
     }
-
     public Actividad getActividad(int i)
     {
         return listaActividades.get(i);

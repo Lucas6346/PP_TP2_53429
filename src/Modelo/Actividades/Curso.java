@@ -3,8 +3,6 @@ package Modelo.Actividades;
 import Modelo.Certificacion.Certificable;
 import Modelo.Estudiante;
 
-//FIXME guardar certificados, no imprimirlos
-
 public class Curso extends Actividad implements Certificable
 {
     private int nivel;
@@ -30,8 +28,8 @@ public class Curso extends Actividad implements Certificable
     @Override
     public String generarCertificado(Estudiante est)
     {
-        String txt = "La " + ENTIDAD_EMISORA + "certifica que el estudiante " + est.getNombre() + ", legajo " +
-                est.getLegajo() + "completó el curso: " + getTitulo() + " de nivel " + nivel;
+        String txt = "La " + ENTIDAD_EMISORA + " certifica que el estudiante " + est.getNombre() + ", legajo " +
+                est.getLegajo() + " completó el curso: " + getTitulo() + " de nivel " + nivel;
 
         return txt;
     }
