@@ -1,6 +1,10 @@
 import Excepciones.CupoExcedidoException;
 import Modelo.*;
 
+//TODO
+//  Crear actividad curso
+//  Emitir certificados
+
 public class App
 {
     public static void main(String[] args)
@@ -20,10 +24,10 @@ public class App
             ev1.asignarSala(sala1);
 
             //d) Actividades
-            ev1.crearActividad(0, "Charla de sistemas", 50, "Charla", "Juan Perez");
-            ev1.crearActividad(1, "Taller de Programación", 200, "Taller", true);
+            ev1.crearActividad(0, "Charla de sistemas", 50, "Charla");
+            ev1.crearActividad(1, "Taller de Programación", 200, "Taller");
 
-            //e) Inscribir estudiantes en la charla
+            //e) Inscribir estudiantes
             ev1.getActividad(0).inscribir(est1);
             ev1.getActividad(0).inscribir(est2);
 

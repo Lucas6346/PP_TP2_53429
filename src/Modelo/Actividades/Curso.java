@@ -3,6 +3,8 @@ package Modelo.Actividades;
 import Modelo.Certificacion.Certificable;
 import Modelo.Estudiante;
 
+//FIXME guardar certificados, no imprimirlos
+
 public class Curso extends Actividad implements Certificable
 {
     private int nivel;

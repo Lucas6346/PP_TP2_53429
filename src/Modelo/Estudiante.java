@@ -2,6 +2,8 @@ package Modelo;
 
 import java.io.Serializable;
 
+//TODO lista de strings para guardar los certificados
+
 public class Estudiante implements Serializable
 {
     private String legajo;
