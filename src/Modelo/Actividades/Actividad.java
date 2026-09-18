@@ -12,9 +12,11 @@ public abstract class Actividad implements Serializable {
     private int id;
     private String titulo;
     private int cupoMaximo;
-    public static final int CUPO_MINIMO = 10;
 
     private List<Inscripcion> listaInscripciones;
+
+    public static final int CUPO_MINIMO = 10;
+    private static int cantidadActividades = 0;
 
     public Actividad(int id, String titulo, int cupoMaximo) {
         this.id = id;
@@ -22,6 +24,8 @@ public abstract class Actividad implements Serializable {
         this.cupoMaximo = cupoMaximo;
 
         this.listaInscripciones = new ArrayList<>();
+
+        cantidadActividades++;
     }
 
     public void inscribir(Estudiante estudiante) throws CupoExcedidoException {
@@ -53,10 +57,16 @@ public abstract class Actividad implements Serializable {
         System.out.println("| Esta actividad es de tipo: " + this.getTipo());
     }
 
+    public List<Inscripcion> getListaInscripciones() { return listaInscripciones; }
     public String getTitulo()
     {
         return titulo;
     }
+    public int getId()
+    {
+        return id;
+    }
+    public static int getCantidadActividades() { return cantidadActividades; }
 
     public abstract double calcularCostoMateriales();
     public abstract String getTipo();

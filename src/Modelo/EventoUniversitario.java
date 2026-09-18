@@ -85,7 +85,7 @@ public class EventoUniversitario implements Serializable {
 
         if(tipoActividad.equals("Charla"))
         {
-            System.out.println("Ingrese el nombre del disertante: ");
+            System.out.print("Ingrese el nombre del disertante: ");
             String disertante = scanner.nextLine();
             listaActividades.add(new Charla(i, titulo, cupoMax, disertante));
         }
@@ -93,7 +93,7 @@ public class EventoUniversitario implements Serializable {
         {
             boolean requiereNotebook = false;
 
-            System.out.println("Requiere notebook? (S/N)");
+            System.out.print("Requiere notebook? (S/N): ");
             if(scanner.nextLine().equals("S"))
             {
                 requiereNotebook = true;
@@ -103,8 +103,8 @@ public class EventoUniversitario implements Serializable {
         }
         else if(tipoActividad.equals("Curso"))
         {
-            System.out.println("Ingrese el nivel del curso: ");
-            int nivel = scanner.nextInt();
+            System.out.print("Ingrese el nivel del curso: ");
+            int nivel = Integer.parseInt(scanner.nextLine());
             listaActividades.add(new Curso(i, titulo, cupoMax, nivel));
         }
     }
@@ -171,11 +171,24 @@ public class EventoUniversitario implements Serializable {
         return ev;
     }
 
-    public static int getCantidadEventos() {
-        return cantidadEventos;
+    public String getId()
+    {
+        return id;
+    }
+    public String getTitulo()
+    {
+        return titulo;
     }
     public Actividad getActividad(int i)
     {
         return listaActividades.get(i);
+    }
+    public List<Actividad> getListaActividades()
+    {
+        return listaActividades;
+    }
+
+    public static int getCantidadEventos() {
+        return cantidadEventos;
     }
 }

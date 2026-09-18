@@ -24,4 +24,9 @@ public class Inscripcion implements Serializable {
         System.out.println("| Datos del estudiante:");
         est.mostrarDatosEstudiante();
     }
+
+    public Estudiante getEstudiante()
+    {
+        return est;
+    }
 }

@@ -10,11 +10,15 @@ public class Estudiante implements Serializable
     private String nombre;
     private List<String> listaCertificados;
 
+    private static int cantidadEstudiantes = 0;
+
     public Estudiante(String legajo, String nombre) {
         this.legajo = legajo;
         this.nombre = nombre;
 
         listaCertificados = new ArrayList<>();
+
+        cantidadEstudiantes++;
     }
 
     public void mostrarDatosEstudiante() {
@@ -31,6 +35,7 @@ public class Estudiante implements Serializable
     {
         return listaCertificados.get(i);
     }
+    public List<String> getListaCertificados() { return listaCertificados; }
     public String getNombre()
     {
         return nombre;
@@ -39,4 +44,5 @@ public class Estudiante implements Serializable
     {
         return legajo;
     }
+    public static int getCantidadEstudiantes() { return cantidadEstudiantes; }
 }
