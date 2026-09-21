@@ -1,13 +1,15 @@
 import Excepciones.CupoExcedidoException;
 import Modelo.*;
-import Modelo.Actividades.Actividad;
+import Modelo.Actividades.*;
 import Modelo.Certificacion.Certificable;
 
 import java.util.*;
 
 //TODO asignar automaticamente el id de eventos y actividades? (con el static cantidad)
 
-//FIXME revisar forma de asignar salas y actividades
+//FIXME
+//  revisar forma de asignar salas y actividades
+//  mejorar manejo de errores
 
 public class App
 {
@@ -48,7 +50,7 @@ public class App
                 }
             } while(est);
 
-            //b) Evento
+            //b) Eventos
             do
             {
                 String nombre;
@@ -73,7 +75,7 @@ public class App
                 }
             } while(ev);
 
-            //c) Sala
+            //b) Salas
             do
             {
                 int id;
@@ -96,7 +98,7 @@ public class App
                 }
             } while(sala);
 
-            //d) Actividades
+            //b) Actividades
             do
             {
                 int id;
@@ -125,93 +127,74 @@ public class App
 
             } while(act);
 
-            //e) Inscribir estudiantes
-            try
+            //c) Inscribir estudiantes
+            do
             {
-                do
+                int legajo;
+                int idActividad;
+                int idEvento;
+                EventoUniversitario eventoUni;
+                Estudiante estudiante;
+
+                System.out.println("Ingrese el legajo del estudiante a inscribir: ");
+                listarEstudiantes(listaEstudiantes);
+                System.out.print("Legajo: ");
+                legajo = Integer.parseInt(scanner.nextLine());
+                estudiante = listaEstudiantes.get(dictLegajos.get(legajo));
+
+                System.out.println("Ingrese el id del evento correspondiente: ");
+                listarEventos(listaEventos);
+                System.out.print("Id: ");
+                idEvento = Integer.parseInt(scanner.nextLine());
+                eventoUni = listaEventos.get(idEvento);
+
+                try
                 {
-                    int legajo;
-                    int idActividad;
-                    int idEvento;
-                    EventoUniversitario eventoUni;
-                    Estudiante estudiante;
-
-                    System.out.println("Ingrese el legajo del estudiante a inscribir: ");
-                    listarEstudiantes(listaEstudiantes);
-                    System.out.print("Legajo: ");
-                    legajo = Integer.parseInt(scanner.nextLine());
-                    estudiante = listaEstudiantes.get(dictLegajos.get(legajo));
-
-                    System.out.println("Ingrese el id del evento correspondiente: ");
-                    listarEventos(listaEventos);
-                    System.out.print("Id: ");
-                    idEvento = Integer.parseInt(scanner.nextLine());
-                    eventoUni = listaEventos.get(idEvento);
-
                     System.out.println("Ingrese el id de la actividad correspondiente: ");
                     listarActividades(eventoUni);
                     System.out.print("Id: ");
                     idActividad = Integer.parseInt(scanner.nextLine());
                     eventoUni.getActividad(idActividad).inscribir(estudiante);
+                }
+                catch(CupoExcedidoException ex)
+                {
+                    System.out.println("Error, cupo excedido.\nExcepción: " + ex.getMessage());
+                    System.out.println("Ocurrido en:");
+                    ex.getActividadAsociada().mostrarDatosAct();
+                }
 
-                    System.out.print("Desea seguir inscribiendo estudiantes? (S/N): ");
-                    if(scanner.nextLine().equals("N"))
-                    {
-                        ins = false;
-                    }
+                System.out.print("Desea seguir inscribiendo estudiantes? (S/N): ");
+                if(scanner.nextLine().equals("N"))
+                {
+                    ins = false;
+                }
 
-                } while(ins);
-            }
-            catch(CupoExcedidoException ex)
-            {
-                System.out.println("Error, cupo excedido.\nExcepción: " + ex.getMessage());
-                System.out.println("Ocurrido en:");
-                ex.getActividadAsociada().mostrarDatosAct();
-            }
+            } while(ins);
 
-            //f) Generar certificados
+
+            //d) Filtrar lista de actividades por tipo concreto
+            System.out.println("\nFiltrando actividades por tipo...");
             for(EventoUniversitario evento : listaEventos)
             {
-                for(Actividad actividad : evento.getListaActividades())
-                {
-                    if(actividad instanceof Certificable)
-                    {
-                        for(Inscripcion inscripcion : actividad.getListaInscripciones())
-                        {
-                            String certificado = ((Certificable) evento).generarCertificado(inscripcion.getEstudiante());
-                            inscripcion.getEstudiante().guardarCertificado(certificado);
-                        }
-                    }
-                }
+                List<Charla> charlas = evento.filtrarActividesPorTipo(Charla.class);
+                List<Taller> talleres = evento.filtrarActividesPorTipo(Taller.class);
+                List<Curso> cursos = evento.filtrarActividesPorTipo(Curso.class);
+
+                System.out.println("Evento: " + evento.getTitulo());
+                System.out.println("Charlas: ");
+                listarActividades(charlas);
+                System.out.println("Talleres: ");
+                listarActividades(talleres);
+                System.out.println("Cursos: ");
+                listarActividades(cursos);
             }
 
-            //g) Mostrar certificados
-            System.out.println("===== Mostrando Certificados =====");
-            for(Estudiante estudiante : listaEstudiantes)
-            {
-                System.out.println("===== Certificado/s del estudiante: " + estudiante.getNombre());
-                for(String certificado : estudiante.getListaCertificados())
-                {
-                    System.out.println(certificado);
-                    System.out.println("-----");
-                }
-            }
+            //e) Mostrar cantidad de actividades por cada tipo
 
-            //h) Mostrar resumen de datos del evento
-            for(EventoUniversitario evento : listaEventos)
-            {
-                evento.mostrarDatos();
-            }
-            System.out.println("Total de eventos creados: " + EventoUniversitario.getCantidadEventos());
+            //f) Costo de materiales correspondiente
 
-            //Serializar eventos
-            for(EventoUniversitario evento : listaEventos)
-            {
-                if(evento.SerializarEvento(evento.getTitulo() + "- Serializacion.dat"))
-                {
-                    System.out.println("Evento [" + evento.getTitulo() + "] serializado correctamente.");
-                }
-            }
+            //g) Filtrado correcto???
+
         }
         catch (Exception e)
         {
@@ -228,6 +211,13 @@ public class App
     public static void listarActividades(EventoUniversitario ev)
     {
         for (Actividad act : ev.getListaActividades())
+        {
+            System.out.println(act.getId() + " | " + act.getTitulo());
+        }
+    }
+    public static <T extends Actividad> void  listarActividades(List<T> lista)
+    {
+        for(T act : lista)
         {
             System.out.println(act.getId() + " | " + act.getTitulo());
         }

@@ -8,7 +8,7 @@ public class CupoExcedidoException extends Exception
 
     public CupoExcedidoException(Actividad actAsociada)
     {
-        super();
+        super("La actividad " + actAsociada.getTitulo() + "alcanzó su cupo máximo");
         this.actAsociada = actAsociada;
     }
 

@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+//TODO
+//  -filtrarActividadesPorTipo()
+//  -calcularCostoMateriales()
+
 //FIXME:
 //  -cambiar formas de mostrar los datos implementando getters en las clases necesarias en lugar de submetodos mostrar
 //  -en mostrar datos, tambien mostrar datos propios de cada subclase actividad (disertante, nivel, ...)
@@ -169,6 +173,21 @@ public class EventoUniversitario implements Serializable {
         }
 
         return ev;
+    }
+
+    public <T extends Actividad> List<T> filtrarActividesPorTipo(Class<T> tipo)
+    {
+        List<T> lista = new ArrayList<>();
+
+        for(Actividad act : listaActividades)
+        {
+            if(tipo.isInstance(act))
+            {
+                lista.add(tipo.cast(act));
+            }
+        }
+
+        return lista;
     }
 
     public String getId()
