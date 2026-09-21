@@ -141,7 +141,7 @@ public class App
                     {
                         System.out.println("Error, cupo excedido.\nExcepción: " + ex.getMessage());
                         System.out.println("Ocurrido en:");
-                        ex.getActividadAsociada().mostrarDatosAct();
+                        ex.getActividadAsociada().mostrarIdentificacion();
                     }
 
                     System.out.print("Desea seguir inscribiendo estudiantes? (S/N): ");

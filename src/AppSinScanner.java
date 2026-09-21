@@ -39,7 +39,7 @@ public class AppSinScanner
         {
             System.out.println("Error, cupo excedido.\nExcepción: " + ex.getMessage());
             System.out.println("Ocurrido en:");
-            ex.getActividadAsociada().mostrarDatosAct();
+            ex.getActividadAsociada().mostrarIdentificacion();
         }
 
 

@@ -46,12 +46,6 @@ public abstract class Actividad implements Serializable {
         }
     }
 
-    public void mostrarDatosAct() {
-        System.out.println("| Actividad: " + titulo);
-        System.out.println("| ID de actividad: " + id);
-        System.out.println("| Cupo máximo: " + cupoMaximo);
-    }
-
     public final void mostrarIdentificacion()
     {
         System.out.println("- " + getTipo() + ": " + titulo + " (id=" + id + ")" + " - Cupo máximo: " + cupoMaximo);

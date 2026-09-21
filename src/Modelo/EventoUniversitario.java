@@ -66,7 +66,6 @@ public class EventoUniversitario implements Serializable {
 
         for(Actividad act : listaActividades)
         {
-            act.mostrarDatosAct();
             act.mostrarIdentificacion();
             act.mostrarInscripciones();
             System.out.println("----------------------------------------");
