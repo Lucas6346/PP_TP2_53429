@@ -20,7 +20,7 @@ public class App
         boolean ev = true;
         boolean sala = true;
         boolean act = true;
-        boolean ins = true;
+        boolean ins;
         List<Estudiante> listaEstudiantes = new ArrayList<>();
         HashMap<Integer, Integer> dictLegajos = new HashMap<>();
         List<EventoUniversitario> listaEventos = new ArrayList<>();
@@ -101,6 +101,8 @@ public class App
             //b) Actividades
             do
             {
+                ins = true;
+
                 int id;
                 String nombre;
                 int cupoMaximo;
@@ -119,6 +121,36 @@ public class App
                 id = Integer.parseInt(scanner.nextLine());
                 listaEventos.get(id).crearActividad(Actividad.getCantidadActividades(), nombre, cupoMaximo, tipo);
 
+                //c) Inscribir estudiantes
+                do
+                {
+                    int legajo;
+                    Estudiante estudiante;
+
+                    System.out.println("\nIngrese el legajo del estudiante a inscribir a: " + nombre);
+                    listarEstudiantes(listaEstudiantes);
+                    System.out.print("Legajo: ");
+                    legajo = Integer.parseInt(scanner.nextLine());
+                    estudiante = listaEstudiantes.get(dictLegajos.get(legajo));
+
+                    try
+                    {
+                        listaEventos.get(id).getActividad(Actividad.getCantidadActividades() - 1).inscribir(estudiante);
+                    }
+                    catch(CupoExcedidoException ex)
+                    {
+                        System.out.println("Error, cupo excedido.\nExcepción: " + ex.getMessage());
+                        System.out.println("Ocurrido en:");
+                        ex.getActividadAsociada().mostrarDatosAct();
+                    }
+
+                    System.out.print("Desea seguir inscribiendo estudiantes? (S/N): ");
+                    if(scanner.nextLine().equals("N"))
+                    {
+                        ins = false;
+                    }
+                } while (ins);
+
                 System.out.print("Desea seguir creando actividades (S/N)?: ");
                 if(scanner.nextLine().equals("N"))
                 {
@@ -126,50 +158,6 @@ public class App
                 }
 
             } while(act);
-
-            //c) Inscribir estudiantes
-            do
-            {
-                int legajo;
-                int idActividad;
-                int idEvento;
-                EventoUniversitario eventoUni;
-                Estudiante estudiante;
-
-                System.out.println("Ingrese el legajo del estudiante a inscribir: ");
-                listarEstudiantes(listaEstudiantes);
-                System.out.print("Legajo: ");
-                legajo = Integer.parseInt(scanner.nextLine());
-                estudiante = listaEstudiantes.get(dictLegajos.get(legajo));
-
-                System.out.println("Ingrese el id del evento correspondiente: ");
-                listarEventos(listaEventos);
-                System.out.print("Id: ");
-                idEvento = Integer.parseInt(scanner.nextLine());
-                eventoUni = listaEventos.get(idEvento);
-
-                try
-                {
-                    System.out.println("Ingrese el id de la actividad correspondiente: ");
-                    listarActividades(eventoUni);
-                    System.out.print("Id: ");
-                    idActividad = Integer.parseInt(scanner.nextLine());
-                    eventoUni.getActividad(idActividad).inscribir(estudiante);
-                }
-                catch(CupoExcedidoException ex)
-                {
-                    System.out.println("Error, cupo excedido.\nExcepción: " + ex.getMessage());
-                    System.out.println("Ocurrido en:");
-                    ex.getActividadAsociada().mostrarDatosAct();
-                }
-
-                System.out.print("Desea seguir inscribiendo estudiantes? (S/N): ");
-                if(scanner.nextLine().equals("N"))
-                {
-                    ins = false;
-                }
-
-            } while(ins);
 
 
             //d) Filtrar lista de actividades por tipo concreto
