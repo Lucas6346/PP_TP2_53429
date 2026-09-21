@@ -18,6 +18,11 @@ public class Inscripcion implements Serializable {
         this.act = act;
     }
 
+    public void confirmarInscripcion()
+    {
+        estado = "Confirmado";
+    }
+
     public void mostrarDatosInscripcion() {
         System.out.println("| Fecha: " + fecha);
         System.out.println("| Estado: " + estado);

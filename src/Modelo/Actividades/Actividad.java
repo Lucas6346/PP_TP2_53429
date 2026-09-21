@@ -29,7 +29,7 @@ public abstract class Actividad implements Serializable {
     }
 
     public void inscribir(Estudiante estudiante) throws CupoExcedidoException {
-        Inscripcion ins = new Inscripcion(LocalDate.now(), "Inscripto", estudiante, this);
+        Inscripcion ins = new Inscripcion(LocalDate.now(), "Registrado", estudiante, this);
 
         if(listaInscripciones.size() == cupoMaximo) throw new CupoExcedidoException(this);
         listaInscripciones.add(ins);
