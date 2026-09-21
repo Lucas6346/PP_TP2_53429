@@ -7,10 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-//TODO
-//  -filtrarActividadesPorTipo()
-//  -calcularCostoMateriales()
-
 //FIXME:
 //  -cambiar formas de mostrar los datos implementando getters en las clases necesarias en lugar de submetodos mostrar
 //  -en mostrar datos, tambien mostrar datos propios de cada subclase actividad (disertante, nivel, ...)
@@ -188,6 +184,18 @@ public class EventoUniversitario implements Serializable {
         }
 
         return lista;
+    }
+
+    public double calcularCostoMateriales(List<? extends Actividad> actividades)
+    {
+        double total = 0;
+
+        for (int i = 0; i < actividades.size(); i++)
+        {
+            total += actividades.get(i).calcularCostoMateriales();
+        }
+
+        return total;
     }
 
     public String getId()

@@ -174,6 +174,8 @@ public class App
 
             //d) Filtrar lista de actividades por tipo concreto
             //e) Mostrar total de actividades de cada tipo por evento
+            //f) Costo de materiales correspondiente
+            //g) Filtrado correcto
             System.out.println("\nFiltrando actividades por tipo...");
             for(EventoUniversitario evento : listaEventos)
             {
@@ -182,20 +184,17 @@ public class App
                 List<Curso> cursos = evento.filtrarActividesPorTipo(Curso.class);
 
                 System.out.println("Evento: " + evento.getTitulo());
-                System.out.println("Charlas: (Total: " + charlas.size() + ")");
+                System.out.println("Charlas | Total: " + charlas.size() + " | Costo de materiales: $" + evento.calcularCostoMateriales(charlas));
                 listarActividades(charlas);
-                System.out.println("Talleres: (Total: " + talleres.size() + ")");
+                System.out.println("Talleres | Total: " + talleres.size() + " | Costo de materiales: $" + evento.calcularCostoMateriales(talleres));
                 listarActividades(talleres);
-                System.out.println("Cursos: (Total: " + cursos.size() + ")");
+                System.out.println("Cursos | Total: " + cursos.size() + " | Costo de materiales: $" + evento.calcularCostoMateriales(cursos));
                 listarActividades(cursos);
+
+                System.out.println("\nLista de charlas: " + charlas);
+                System.out.println("Lista de talleres: " + talleres);
+                System.out.println("Lista de cursos: " + cursos);
             }
-
-            //f) Costo de materiales correspondiente
-
-
-
-            //g) Filtrado correcto???
-
         }
         catch (Exception e)
         {
