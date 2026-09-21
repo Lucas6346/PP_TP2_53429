@@ -173,6 +173,7 @@ public class App
 
 
             //d) Filtrar lista de actividades por tipo concreto
+            //e) Mostrar total de actividades de cada tipo por evento
             System.out.println("\nFiltrando actividades por tipo...");
             for(EventoUniversitario evento : listaEventos)
             {
@@ -181,17 +182,17 @@ public class App
                 List<Curso> cursos = evento.filtrarActividesPorTipo(Curso.class);
 
                 System.out.println("Evento: " + evento.getTitulo());
-                System.out.println("Charlas: ");
+                System.out.println("Charlas: (Total: " + charlas.size() + ")");
                 listarActividades(charlas);
-                System.out.println("Talleres: ");
+                System.out.println("Talleres: (Total: " + talleres.size() + ")");
                 listarActividades(talleres);
-                System.out.println("Cursos: ");
+                System.out.println("Cursos: (Total: " + cursos.size() + ")");
                 listarActividades(cursos);
             }
 
-            //e) Mostrar cantidad de actividades por cada tipo
-
             //f) Costo de materiales correspondiente
+
+
 
             //g) Filtrado correcto???
 
