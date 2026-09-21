@@ -54,7 +54,7 @@ public abstract class Actividad implements Serializable {
 
     public final void mostrarIdentificacion()
     {
-        System.out.println("| Esta actividad es de tipo: " + this.getTipo());
+        System.out.println("- " + getTipo() + ": " + titulo + " (id=" + id + ")" + " - Cupo máximo: " + cupoMaximo);
     }
 
     public List<Inscripcion> getListaInscripciones() { return listaInscripciones; }
