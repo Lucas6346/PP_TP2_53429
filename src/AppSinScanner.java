@@ -130,9 +130,9 @@ public class AppSinScanner
         //Filtrado correcto
         System.out.println("\nFiltrando actividades por tipo...");
 
-        List<Charla> charlas = ev1.filtrarActividesPorTipo(Charla.class);
-        List<Taller> talleres = ev1.filtrarActividesPorTipo(Taller.class);
-        List<Curso> cursos = ev1.filtrarActividesPorTipo(Curso.class);
+        List<Charla> charlas = ev1.filtrarActividadesPorTipo(Charla.class);
+        List<Taller> talleres = ev1.filtrarActividadesPorTipo(Taller.class);
+        List<Curso> cursos = ev1.filtrarActividadesPorTipo(Curso.class);
 
         System.out.println("Evento: " + ev1.getTitulo());
         System.out.println("Charlas | Total: " + charlas.size() + " | Costo de materiales: $" + ev1.calcularCostoMateriales(charlas));
