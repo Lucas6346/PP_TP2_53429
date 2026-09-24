@@ -1,11 +1,14 @@
 import Excepciones.CupoExcedidoException;
+import Hilos.EnvioTicketsThread;
 import Modelo.*;
 import Modelo.Actividades.*;
 import Modelo.Certificacion.Certificable;
 
 import java.util.*;
 
-//TODO asignar automaticamente el id de eventos y actividades? (con el static cantidad)
+//TODO
+//  asignar automaticamente el id de eventos y actividades? (con el static cantidad)
+//  como se hace el punto 4?
 
 //FIXME
 //  revisar forma de asignar salas y actividades
@@ -160,29 +163,35 @@ public class App
             } while(act);
 
 
-            //d) Filtrar lista de actividades por tipo concreto
-            //e) Mostrar total de actividades de cada tipo por evento
-            //f) Costo de materiales correspondiente
-            //g) Filtrado correcto
-            System.out.println("\nFiltrando actividades por tipo...");
+            //d) Confirmar algunas inscripciones
+            //e) Generar tickets de acceso
+            Random rnd = new Random();
             for(EventoUniversitario evento : listaEventos)
             {
-                List<Charla> charlas = evento.filtrarActividesPorTipo(Charla.class);
-                List<Taller> talleres = evento.filtrarActividesPorTipo(Taller.class);
-                List<Curso> cursos = evento.filtrarActividesPorTipo(Curso.class);
-
-                System.out.println("Evento: " + evento.getTitulo());
-                System.out.println("Charlas | Total: " + charlas.size() + " | Costo de materiales: $" + evento.calcularCostoMateriales(charlas));
-                listarActividades(charlas);
-                System.out.println("Talleres | Total: " + talleres.size() + " | Costo de materiales: $" + evento.calcularCostoMateriales(talleres));
-                listarActividades(talleres);
-                System.out.println("Cursos | Total: " + cursos.size() + " | Costo de materiales: $" + evento.calcularCostoMateriales(cursos));
-                listarActividades(cursos);
-
-                System.out.println("\nLista de charlas: " + charlas);
-                System.out.println("Lista de talleres: " + talleres);
-                System.out.println("Lista de cursos: " + cursos);
+                for(Actividad actividad : evento.getListaActividades())
+                {
+                    if(!actividad.getListaInscripciones().isEmpty())
+                    {
+                        int num = rnd.nextInt(actividad.getListaInscripciones().size());
+                        actividad.getListaInscripciones().get(num).confirmarInscripcion();
+                    }
+                }
             }
+
+
+            //f) Enviar los tickets generados (Hilo)
+            EnvioTicketsThread hilo = new EnvioTicketsThread();
+            hilo.start();
+
+
+            //g) Mostrar los datos del evento
+            for(EventoUniversitario evento : listaEventos)
+            {
+                evento.mostrarDatos();
+            }
+
+            //h) Evidenciar en consola los dos flujos en ejecución
+
         }
         catch (Exception e)
         {
