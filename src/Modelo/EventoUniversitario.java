@@ -158,7 +158,7 @@ public class EventoUniversitario implements Serializable {
         }
         catch (IOException ex)
         {
-            System.out.println("Error al serializar evento:");
+            System.out.println("Error al leer evento:");
             System.out.println(ex.getMessage());
         }
         catch (ClassNotFoundException ex)
@@ -170,7 +170,7 @@ public class EventoUniversitario implements Serializable {
         return ev;
     }
 
-    public <T extends Actividad> List<T> filtrarActividesPorTipo(Class<T> tipo)
+    public <T extends Actividad> List<T> filtrarActividadesPorTipo(Class<T> tipo)
     {
         List<T> lista = new ArrayList<>();
 

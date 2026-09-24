@@ -136,7 +136,7 @@ public class App
 
                     try
                     {
-                        listaEventos.get(id).getActividad(Actividad.getCantidadActividades() - 1).inscribir(estudiante);
+                        listaEventos.get(id).getActividad(listaEventos.get(id).getListaActividades().size() - 1).inscribir(estudiante);
                     }
                     catch(CupoExcedidoException ex)
                     {
@@ -225,7 +225,7 @@ public class App
                     {
                         for(Inscripcion inscripcion : actividad.getListaInscripciones())
                         {
-                            String certificado = ((Certificable) evento).generarCertificado(inscripcion.getEstudiante());
+                            String certificado = ((Certificable) actividad).generarCertificado(inscripcion.getEstudiante());
                             inscripcion.getEstudiante().guardarCertificado(certificado);
                         }
                     }
@@ -255,9 +255,9 @@ public class App
             System.out.println("\nFiltrando actividades por tipo...");
             for(EventoUniversitario evento : listaEventos)
             {
-                List<Charla> charlas = evento.filtrarActividesPorTipo(Charla.class);
-                List<Taller> talleres = evento.filtrarActividesPorTipo(Taller.class);
-                List<Curso> cursos = evento.filtrarActividesPorTipo(Curso.class);
+                List<Charla> charlas = evento.filtrarActividadesPorTipo(Charla.class);
+                List<Taller> talleres = evento.filtrarActividadesPorTipo(Taller.class);
+                List<Curso> cursos = evento.filtrarActividadesPorTipo(Curso.class);
 
                 System.out.println("Evento: " + evento.getTitulo());
                 System.out.println("Charlas | Total: " + charlas.size() + " | Costo de materiales: $" + evento.calcularCostoMateriales(charlas));
