@@ -48,7 +48,7 @@ public class EventoUniversitario implements Serializable {
     public void mostrarDatos() {
 
         String strEsGratis = "No";
-        System.out.println("============== Mostrando datos de evento ==============");
+        System.out.println("=================== Datos de evento ===================");
 
         System.out.println("Id del evento: " + id);
         System.out.println("Título: " + titulo);
@@ -78,10 +78,8 @@ public class EventoUniversitario implements Serializable {
         this.sala = sala;
     }
 
-    public void crearActividad(int i, String titulo, int cupoMax, String tipoActividad)
+    public void crearActividad(int i, String titulo, int cupoMax, String tipoActividad, Scanner scanner)
     {
-        Scanner scanner = new Scanner(System.in);
-
         if(tipoActividad.equals("Charla"))
         {
             System.out.print("Ingrese el nombre del disertante: ");

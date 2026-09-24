@@ -12,7 +12,7 @@ public class Inscripcion implements Serializable {
     private final Actividad act;
     private TicketDeAcceso ticket;
 
-    private class TicketDeAcceso
+    private class TicketDeAcceso implements Serializable
     {
         private String idTicket;
         private LocalDate fechaEmision;
@@ -29,7 +29,9 @@ public class Inscripcion implements Serializable {
 
         public void enviarTicket()
         {
-            //codigo
+            System.out.println("Enviando ticket " + ticket.idTicket + " al estudiante " + est.getNombre() + " legajo " +
+                    est.getLegajo() + ". Corresponde a la actividad: " + act.getTitulo() + ". El ticket fue emitido el " +
+                    ticket.fechaEmision);
         }
     }
 
@@ -43,7 +45,7 @@ public class Inscripcion implements Serializable {
     public void confirmarInscripcion()
     {
         estado = "Confirmado";
-        ticket = new TicketDeAcceso(Integer.toString(TicketDeAcceso.cantidadTickets), LocalDate.now());
+        ticket = new TicketDeAcceso("TK-" + TicketDeAcceso.cantidadTickets, LocalDate.now());
     }
 
     public void mostrarDatosInscripcion() {
@@ -52,6 +54,11 @@ public class Inscripcion implements Serializable {
         System.out.println("| Actividad: " + act.getTitulo());
         System.out.println("| Datos del estudiante:");
         est.mostrarDatosEstudiante();
+    }
+
+    public void enviarTicket()
+    {
+        if(ticket != null) ticket.enviarTicket();
     }
 
     public Estudiante getEstudiante()

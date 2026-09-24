@@ -122,7 +122,7 @@ public class App
                 listarEventos(listaEventos);
                 System.out.print("Id: ");
                 id = Integer.parseInt(scanner.nextLine());
-                listaEventos.get(id).crearActividad(Actividad.getCantidadActividades(), nombre, cupoMaximo, tipo);
+                listaEventos.get(id).crearActividad(Actividad.getCantidadActividades(), nombre, cupoMaximo, tipo, scanner);
 
                 //c) Inscribir estudiantes
                 do
@@ -180,18 +180,18 @@ public class App
 
 
             //f) Enviar los tickets generados (Hilo)
-            EnvioTicketsThread hilo = new EnvioTicketsThread();
-            hilo.start();
-
-
             //g) Mostrar los datos del evento
+            //h) Evidenciar en consola los dos flujos en ejecución
             for(EventoUniversitario evento : listaEventos)
             {
+                EnvioTicketsThread hilo = new EnvioTicketsThread(evento);
+                hilo.start();
+
+                hilo.join();
+                System.out.println("[" + Thread.currentThread().getName() + "]: Mostrando datos...");
                 evento.mostrarDatos();
+                System.out.println("[" + Thread.currentThread().getName() + "]: Datos mostrados");
             }
-
-            //h) Evidenciar en consola los dos flujos en ejecución
-
         }
         catch (Exception e)
         {

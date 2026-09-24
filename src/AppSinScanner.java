@@ -20,9 +20,9 @@ public class AppSinScanner
         ev1.asignarSala(sala1);
 
         //d) Actividades
-        ev1.crearActividad(0, "Charla de sistemas", 50, "Charla");
-        ev1.crearActividad(1, "Taller de Programación", 200, "Taller");
-        ev1.crearActividad(2, "Curso de oratoria", 100, "Curso");
+        //ev1.crearActividad(0, "Charla de sistemas", 50, "Charla");
+        //ev1.crearActividad(1, "Taller de Programación", 200, "Taller");
+        //ev1.crearActividad(2, "Curso de oratoria", 100, "Curso");
 
         //e) Inscribir estudiantes
         try
