@@ -2,18 +2,20 @@ import Excepciones.CupoExcedidoException;
 import Hilos.EnvioTicketsThread;
 import Modelo.*;
 import Modelo.Actividades.*;
+import Modelo.Certificacion.Certificable;
 
 import java.util.*;
 
 //FIXME
 //  asignar automaticamente el id de eventos y actividades? (con el static cantidad)
-//  revisar forma de asignar salas y actividades
+//  revisar forma de asignar salas
 //  mejorar manejo de errores
 
 public class App
 {
     public static void main(String[] args)
     {
+        //------------- EJ4 -------------
         Scanner scanner = new Scanner(System.in);
         boolean est = true;
         boolean ev = true;
@@ -118,7 +120,7 @@ public class App
                 listarEventos(listaEventos);
                 System.out.print("Id: ");
                 id = Integer.parseInt(scanner.nextLine());
-                listaEventos.get(id).crearActividad(Actividad.getCantidadActividades(), nombre, cupoMaximo, tipo, scanner);
+                listaEventos.get(id).crearActividad(Actividad.getCantidadActividades(), nombre, cupoMaximo, tipo);
 
                 //c) Inscribir estudiantes
                 do
@@ -178,16 +180,99 @@ public class App
             //f) Enviar los tickets generados (Hilo)
             //g) Mostrar los datos del evento
             //h) Evidenciar en consola los dos flujos en ejecución
+            try
+            {
+                for(EventoUniversitario evento : listaEventos)
+                {
+                    EnvioTicketsThread hilo = new EnvioTicketsThread(evento);
+                    hilo.start();
+
+                    System.out.println("[" + Thread.currentThread().getName() + "]: Mostrando datos...");
+                    evento.mostrarDatos();
+                    System.out.println("[" + Thread.currentThread().getName() + "]: Datos mostrados");
+                    hilo.join();
+                }
+            }
+            catch (InterruptedException e)
+            {
+                System.out.println("Error de interrupción de hilos");
+                System.out.println(e.getMessage());
+            }
+
+            //------------- FIN EJ4 -------------
+
+            //------------- EJ1 -------------
+            /*
+            //Serializar eventos
             for(EventoUniversitario evento : listaEventos)
             {
-                EnvioTicketsThread hilo = new EnvioTicketsThread(evento);
-                hilo.start();
-
-                System.out.println("[" + Thread.currentThread().getName() + "]: Mostrando datos...");
-                evento.mostrarDatos();
-                System.out.println("[" + Thread.currentThread().getName() + "]: Datos mostrados");
-                hilo.join();
+                if(evento.SerializarEvento(evento.getTitulo() + "- Serializacion.dat"))
+                {
+                    System.out.println("Evento [" + evento.getTitulo() + "] serializado correctamente.");
+                }
             }
+            */
+            //------------- FIN EJ1 -------------
+
+            //------------- EJ2 -------------
+            /*
+            //Generar certificados
+            for(EventoUniversitario evento : listaEventos)
+            {
+                for(Actividad actividad : evento.getListaActividades())
+                {
+                    if(actividad instanceof Certificable)
+                    {
+                        for(Inscripcion inscripcion : actividad.getListaInscripciones())
+                        {
+                            String certificado = ((Certificable) evento).generarCertificado(inscripcion.getEstudiante());
+                            inscripcion.getEstudiante().guardarCertificado(certificado);
+                        }
+                    }
+                }
+            }
+
+            //Mostrar certificados
+            System.out.println("===== Mostrando Certificados =====");
+            for(Estudiante estudiante : listaEstudiantes)
+            {
+                System.out.println("===== Certificado/s del estudiante: " + estudiante.getNombre());
+                for(String certificado : estudiante.getListaCertificados())
+                {
+                    System.out.println(certificado);
+                    System.out.println("-----");
+                }
+            }
+            */
+            //------------- FIN EJ2 -------------
+
+            //------------- EJ3 -------------
+            /*
+            //Filtrar lista de actividades por tipo concreto
+            //Mostrar total de actividades de cada tipo por evento
+            //Costo de materiales correspondiente
+            //Filtrado correcto
+            System.out.println("\nFiltrando actividades por tipo...");
+            for(EventoUniversitario evento : listaEventos)
+            {
+                List<Charla> charlas = evento.filtrarActividesPorTipo(Charla.class);
+                List<Taller> talleres = evento.filtrarActividesPorTipo(Taller.class);
+                List<Curso> cursos = evento.filtrarActividesPorTipo(Curso.class);
+
+                System.out.println("Evento: " + evento.getTitulo());
+                System.out.println("Charlas | Total: " + charlas.size() + " | Costo de materiales: $" + evento.calcularCostoMateriales(charlas));
+                listarActividades(charlas);
+                System.out.println("Talleres | Total: " + talleres.size() + " | Costo de materiales: $" + evento.calcularCostoMateriales(talleres));
+                listarActividades(talleres);
+                System.out.println("Cursos | Total: " + cursos.size() + " | Costo de materiales: $" + evento.calcularCostoMateriales(cursos));
+                listarActividades(cursos);
+
+                System.out.println("\nLista de charlas: " + charlas);
+                System.out.println("Lista de talleres: " + talleres);
+                System.out.println("Lista de cursos: " + cursos);
+            }
+            */
+            //------------- FIN EJ3 -------------
         }
         catch (Exception e)
         {

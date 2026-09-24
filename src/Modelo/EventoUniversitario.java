@@ -78,8 +78,10 @@ public class EventoUniversitario implements Serializable {
         this.sala = sala;
     }
 
-    public void crearActividad(int i, String titulo, int cupoMax, String tipoActividad, Scanner scanner)
+    public void crearActividad(int i, String titulo, int cupoMax, String tipoActividad)
     {
+        Scanner scanner = new Scanner(System.in);
+
         if(tipoActividad.equals("Charla"))
         {
             System.out.print("Ingrese el nombre del disertante: ");
