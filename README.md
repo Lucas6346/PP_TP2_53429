@@ -39,10 +39,10 @@ Al ejecutar la clase `AppSinScanner`, se muestra la siguiente salida, que tambi�
 Ingrese el nombre del disertante: Saul
 Requiere notebook? (S/N): N
 Ingrese el nivel del curso: 16
-
-[Thread-Tickets]: Enviando tickets...
 [main]: Mostrando datos...
 =================== Datos de evento ===================
+
+[Thread-Tickets]: Enviando tickets...
 Id del evento: 0
 Título: Evento de Sistemas
 Costo estimado: 0.0$
@@ -51,23 +51,23 @@ Costo estimado: 0.0$
 Id: 0
 Nombre: Sala Sistemas
 --------------------- Actividades ---------------------
-[Thread-Tickets] Enviando ticket TK-0 al estudiante Juan legajo 53001. Corresponde a la actividad: Charla de sistemas. El ticket fue emitido el 2026-09-24
-[Thread-Tickets] Enviando ticket TK-1 al estudiante Pablo legajo 53002. Corresponde a la actividad: Taller de Programación. El ticket fue emitido el 2026-09-24
+[Thread-Tickets] Enviando ticket TK-0 al estudiante Mateo legajo 53000. Corresponde a la actividad: Charla de sistemas. El ticket fue emitido el 2026-09-24
+[Thread-Tickets] Enviando ticket TK-1 al estudiante Juan legajo 53001. Corresponde a la actividad: Taller de Programación. El ticket fue emitido el 2026-09-24
 [Thread-Tickets] Enviando ticket TK-2 al estudiante Pedro legajo 53003. Corresponde a la actividad: Curso de oratoria. El ticket fue emitido el 2026-09-24
-[Thread-Tickets]: Tickets enviados correctamente
 - Charla: Charla de sistemas (id=0) - Cupo máximo: 50
 ======= Inscripciones =======
+[Thread-Tickets]: Tickets enviados correctamente
 | Hay un total de 2 inscripciones
 | -----
 | Fecha: 2026-09-24
-| Estado: Registrado
+| Estado: Confirmado
 | Actividad: Charla de sistemas
 | Datos del estudiante:
 | Legajo: 53000
 | Nombre: Mateo
 | -----
 | Fecha: 2026-09-24
-| Estado: Confirmado
+| Estado: Registrado
 | Actividad: Charla de sistemas
 | Datos del estudiante:
 | Legajo: 53001
@@ -86,14 +86,14 @@ Nombre: Sala Sistemas
 | Nombre: Mateo
 | -----
 | Fecha: 2026-09-24
-| Estado: Registrado
+| Estado: Confirmado
 | Actividad: Taller de Programación
 | Datos del estudiante:
 | Legajo: 53001
 | Nombre: Juan
 | -----
 | Fecha: 2026-09-24
-| Estado: Confirmado
+| Estado: Registrado
 | Actividad: Taller de Programación
 | Datos del estudiante:
 | Legajo: 53002
