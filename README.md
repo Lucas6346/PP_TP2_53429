@@ -2,7 +2,7 @@
 ## Documentación sobre el proyecto
 Sobre los detalles de la implementación, el programa fue desarrollado en el IDE IntelliJ IDEA, con el SDK 21 Oracle OpenJDK 21.0.11, Language Level SDK default.
 
-<img width="852" height="112" alt="image" src="https://github.com/user-attachments/assets/429ea25c-9fcd-49e8-bf35-ccf28254862f" />
+<img width="855" height="347" alt="image" src="https://github.com/user-attachments/assets/e967e158-b923-4177-9698-bd62a54d2eb1" />
 
 El programa se ejecuta en la clase `AppSinScanner`, en la cual está el código que genera el resultado consignado en el punto 4:
 
