@@ -2,15 +2,11 @@ import Excepciones.CupoExcedidoException;
 import Hilos.EnvioTicketsThread;
 import Modelo.*;
 import Modelo.Actividades.*;
-import Modelo.Certificacion.Certificable;
 
 import java.util.*;
 
-//TODO
-//  asignar automaticamente el id de eventos y actividades? (con el static cantidad)
-//  como se hace el punto 4?
-
 //FIXME
+//  asignar automaticamente el id de eventos y actividades? (con el static cantidad)
 //  revisar forma de asignar salas y actividades
 //  mejorar manejo de errores
 
@@ -187,10 +183,10 @@ public class App
                 EnvioTicketsThread hilo = new EnvioTicketsThread(evento);
                 hilo.start();
 
-                hilo.join();
                 System.out.println("[" + Thread.currentThread().getName() + "]: Mostrando datos...");
                 evento.mostrarDatos();
                 System.out.println("[" + Thread.currentThread().getName() + "]: Datos mostrados");
+                hilo.join();
             }
         }
         catch (Exception e)

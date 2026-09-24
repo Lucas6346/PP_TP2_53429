@@ -29,7 +29,7 @@ public class Inscripcion implements Serializable {
 
         public void enviarTicket()
         {
-            System.out.println("Enviando ticket " + ticket.idTicket + " al estudiante " + est.getNombre() + " legajo " +
+            System.out.println("[" + Thread.currentThread().getName() + "] Enviando ticket " + ticket.idTicket + " al estudiante " + est.getNombre() + " legajo " +
                     est.getLegajo() + ". Corresponde a la actividad: " + act.getTitulo() + ". El ticket fue emitido el " +
                     ticket.fechaEmision);
         }
